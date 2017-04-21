@@ -10,8 +10,9 @@ import javax.swing.*;
 
 /*
  * Creates GUI, which can find all the anagrams of a word given, or of a random word
-
+ * @Reference Java A Beginner's Guide 6th Edition, chapter 16
  * @Author Christopher Chin
+ * 
  */
 
 public class Main implements ActionListener{
@@ -27,6 +28,7 @@ public class Main implements ActionListener{
     
     String randomWord;
     
+    //creates new frame with input text field, 2 buttons and a list
     Main() {
         MainGUI = new JFrame("Anagram Solver");
         
@@ -47,12 +49,10 @@ public class Main implements ActionListener{
         testAnagramButton.addActionListener(this);
         
         AnagramList = new DefaultListModel<String>();
-        AnagramList.addElement("Hi");
 
         AnagramJList = new JList<String>(AnagramList);
         JScrollPane AnagramListScroll = new JScrollPane(AnagramJList);
         AnagramListScroll.setPreferredSize(new Dimension(100, 100));
-        AnagramList.addElement("Hello");
         
         MainGUI.add(Instructions);
         MainGUI.add(inputTextField);
@@ -62,6 +62,7 @@ public class Main implements ActionListener{
         MainGUI.setVisible(true);
     }
     
+    //Event handler when buttons are pressed
     public void actionPerformed (ActionEvent ae){
         JButton buttonPressed = (JButton) ae.getSource();
         ArrayList<String> AnagramArrayList;
@@ -75,15 +76,23 @@ public class Main implements ActionListener{
             AnagramArrayList = Anagram.ListAnagrams(randomWord, dictionary);
         }
         
+        //clears current list from display
         AnagramList.clear();
         
+        //adds new list of anagrams to display
         for(String CurrentAnagram: AnagramArrayList) {
             AnagramList.addElement(CurrentAnagram);
         }
         AnagramJList.setModel(AnagramList);
     }
     
+    /*
+     * Creates windows for a new dictionary file to be input, and will change dictionary file if a new filename is input, or throws exception when file is not valid
+     * Then opens Swing GUI
+     */
     public static void main(String[] args) throws IOException{
+        
+
         String fileName = JOptionPane.showInputDialog("Input in new file or leave blank to use vocabulary.txt");
         if(fileName.isEmpty()){
             dictionary = new Dictionary(new File("vocabulary.txt"));

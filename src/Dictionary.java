@@ -14,6 +14,7 @@ public class Dictionary {
      * 
      * @Author Christopher Chin
      */
+    
     public Dictionary(File wordList) throws IOException{
         dictionary = new ArrayList<>();
         numWords = 0;
@@ -34,6 +35,32 @@ public class Dictionary {
         bufferReader.close();     //closes input stream
     }
 
+    /*
+     * @param Postfix Word prefix subset that will be checked if any words have in the dictionary
+     * @return true or false depending on if prefix is in the dictionary
+     */
+    public Boolean DoAnyWordsStartWith (String preFix){
+        for (String dictionaryWord : dictionary) {
+            if (dictionaryWord.startsWith(preFix)){
+                return true;
+            } else {}
+        }
+        return false;
+    }
+    
+    /*
+     * @param Postfix Word postfix subset that will be checked if any words have in the dictionary
+     * @return true or false depending on if postfix is in the dictionary
+     */
+    public Boolean DoAnyWordsEndWith (String postFix){
+        for (String dictionaryWord : dictionary) {
+            if (dictionaryWord.endsWith(postFix)){
+                return true;
+            } else {}
+        }
+        return false;
+    }
+    
     /*
      * @param TestWord Word that will be checked if its in the dictionary
      * @return true or false depending on if TestWord is in the dictionary
